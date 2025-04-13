@@ -44,7 +44,7 @@ try {
     }
 
     // Query database
-    $stmt = $pdo->prepare("SELECT id, username, password, role FROM users WHERE username = ?");
+    $stmt = $pdo->prepare("SELECT id, username, password, role, name FROM users WHERE username = ?");
     $stmt->execute([$data['username']]);
     $user = $stmt->fetch();
 
@@ -60,7 +60,8 @@ try {
     echo json_encode([
         'success' => true,
         'role' => $user['role'],
-        'user_id' => $user['id']
+        'user_id' => $user['id'],
+        'name' => $user['name']
     ]);
 
 } catch (Exception $e) {
